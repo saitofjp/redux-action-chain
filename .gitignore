@@ -1,0 +1,9 @@
+# NPM
+node_modules
+npm-*.log
+
+# build
+dist
+
+# vscode
+.vscode

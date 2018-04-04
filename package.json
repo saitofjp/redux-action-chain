@@ -1,0 +1,35 @@
+{
+  "name": "redux-action-chain",
+  "version": "0.0.1",
+  "description": "`redux-action-chain` is a middleware that aims to easily manage side effects of application.",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "tsc",
+    "test": "ts-node node_modules/tape/bin/tape tests/*.ts",
+    "prepublish": "npm run clean && npm run test && npm run build"
+  },
+  "keywords": [
+    "redux",
+    "flux",
+    "action",
+    "chain",
+    "side effect"
+  ],
+  "author": "saitofjp",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^9.6.2",
+    "@types/redux-actions": "^2.2.4",
+    "@types/tape": "^4.2.32",
+    "redux": "^3.7.2",
+    "redux-actions": "^2.3.0",
+    "redux-thunk": "^2.2.0",
+    "rimraf": "^2.6.2",
+    "tape": "^4.9.0",
+    "ts-node": "^5.0.1",
+    "typescript": "^2.8.1",
+    "typescript-fsa": "^2.5.0"
+  }
+}
