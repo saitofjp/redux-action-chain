@@ -130,7 +130,7 @@ const chainPingPong = new ActionChain()
 
 //user.js
 const chainUser = new ActionChain()
-    .chain("REQUEST_USER", async (action) => fetchUser(action.payload.userId))
+    .chain("REQUEST_USER", async (payload) => fetchUser(payload.userId))
     .chain("FETCH_USER_SUCCESS", () => fetchBlogPosts())
     .chain("FETCH_USER_SUCCESS", () => ({ type: "PING" }));
 

@@ -99,7 +99,7 @@ tape("chain attach", function (t: tape.Test) {
     let api = dummyApi();
     new ActionChain()
         .chain(actionCreator().type,
-            attach<{payload:number},{hoge:1}>( ({payload}, { dispatch, getState}) => {
+            attach( ({payload}, { dispatch, getState}) => {
                 dispatch(handler(payload))
             }))
         .dispatch(actionCreator(), api);
