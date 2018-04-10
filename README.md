@@ -122,7 +122,7 @@ npm install --save redux-action-chain
 "combine" and  "applyMiddleware". Like "reducer".
 
 ```js
-import { ActionChain, attach, combineActionChains } from "redux-action-chain";
+import { ActionChain, attach, combineActionChains, createActionChainMiddleware } from "redux-action-chain";
 
 //pingpong.js
 const chainPingPong = new ActionChain()
