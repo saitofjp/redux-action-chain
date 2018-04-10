@@ -56,7 +56,7 @@ namespace Handler {
 
 
 {
-    const chain = new ActionChain<State>();
+    const chain = new ActionChain();
 
     chain.chain(ActionCreator.simple, ()=> ({type:"PONG"}) )
     chain.chain(ActionCreator.payloadNumber, ActionCreator.simple)

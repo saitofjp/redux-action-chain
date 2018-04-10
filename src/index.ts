@@ -72,11 +72,11 @@ function getType(target: ActionCreator<any> | string): string {
 }
 
 
-export class ActionChain<STATE>  {
+export class ActionChain  {
 
     protected cases: Array<{
         type: string,
-        handler: HandlerObject<any, any, any, STATE>
+        handler: HandlerObject<any, any, any, any>
     }> = [];
 
     /**
@@ -88,32 +88,32 @@ export class ActionChain<STATE>  {
     chain<PREV>(
         target: ActionCreator<PREV> | string,
         handler: ActionCreatorHandler<void, PREV, any>
-    ): ActionChain<STATE>
+    ): ActionChain
 
     chain<PREV, NEXT>(
         target: ActionCreator<PREV> | string,
         handler: ActionCreatorHandler<void, PREV, NEXT>
-    ): ActionChain<STATE>
+    ): ActionChain
 
     chain<PAYLOAD, PREV extends { payload: PAYLOAD }>(
         target: ActionCreator<PREV> | string,
         handler: ActionCreatorHandler<PAYLOAD, PREV, any>
-    ): ActionChain<STATE>
+    ): ActionChain
 
     chain<PAYLOAD, PREV extends { payload: PAYLOAD }, NEXT>(
         target: ActionCreator<PREV> | string,
         handler: ActionCreatorHandler<PAYLOAD, PREV, NEXT>
-    ): ActionChain<STATE>
+    ): ActionChain
 
-    chain<PREV>(
+    chain<PREV, STATE>(
         target: ActionCreator<PREV> | string,
         handler: HandlerObject<any, PREV, void, STATE>
-    ): ActionChain<STATE>
+    ): ActionChain
 
-    chain<PAYLOAD, PREV>(
+    chain<PAYLOAD, PREV, STATE>(
         target: ActionCreator<PREV> | string,
         handler: ActionCreatorHandler<PAYLOAD, PREV, any> | HandlerObject<any, PREV, void, STATE>,
-    ): ActionChain<STATE> {
+    ): ActionChain {
         this.chainOfType(getType(target),
             isHandlerObject(handler)
                 ? handler :
@@ -122,10 +122,10 @@ export class ActionChain<STATE>  {
         return this;
     }
 
-    protected chainOfType<PAYLOAD, PREV, NEXT>(
+    protected chainOfType<PAYLOAD, PREV, NEXT, STATE>(
         type: string,
         handler: HandlerObject<PAYLOAD, PREV, NEXT, STATE>
-    ): ActionChain<STATE> {
+    ): ActionChain {
         this.cases.push({ type, handler });
         return this;
     }
@@ -136,13 +136,13 @@ export class ActionChain<STATE>  {
             .map((chain) => chain.handler)
     }
 
-    handle(action: Action, api: MiddlewareAPI<STATE>) {
+    handle<STATE>(action: Action, api: MiddlewareAPI<STATE>) {
         return this.get(action)
             .map(handle => handle.handle(action, api))
             .filter(next => next)
     }
 
-    dispatch(action: Action, api: MiddlewareAPI<STATE>) {
+    dispatch<STATE>(action: Action, api: MiddlewareAPI<STATE>) {
         return this.get(action)
             .map(handle => {
                 const next = handle.handle(action, api);
@@ -155,8 +155,8 @@ export class ActionChain<STATE>  {
             .filter(res => res)
     }
 
-    static build<STATE>(...chains: ActionChain<STATE>[]): ActionChain<STATE> {
-        const ac = new ActionChain<STATE>();
+    static build(...chains: ActionChain[]): ActionChain {
+        const ac = new ActionChain();
         ac.cases = chains
             .map((chain) => chain.cases)
             .reduce((a, b) => a.concat(b), []);
@@ -165,19 +165,18 @@ export class ActionChain<STATE>  {
 }
 
 
-export const createActionChainMiddleware = (chain: ActionChain<any>): Middleware => {
+export const createActionChainMiddleware = (chain: ActionChain): Middleware => {
     return <STATE>(api: MiddlewareAPI<STATE>) => {
 
         return (next: Dispatch<STATE>) => <A extends Action>(action: A): A => {
             const result = next(action);
 
-            (<ActionChain<STATE>>chain)
-                .dispatch(action, api);
+            chain.dispatch(action, api);
 
             return result;
         };
     }
 }
 
-export const combineActionChains = <STATE>(...chains: ActionChain<STATE>[]): ActionChain<STATE> =>
-    ActionChain.build<STATE>(...chains);
+export const combineActionChains = (...chains: ActionChain[]): ActionChain =>
+    ActionChain.build(...chains);

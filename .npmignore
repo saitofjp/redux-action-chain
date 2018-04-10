@@ -1,2 +1,4 @@
-test/
+tests/
 src/
+.vscode/
+tsconfig.json
