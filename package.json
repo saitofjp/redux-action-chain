@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/saitofjp/redux-action-chain"
+    "url": "git+https://github.com/saitofjp/redux-action-chain.git"
   },
   "keywords": [
     "redux",
@@ -23,6 +23,10 @@
   ],
   "author": "saitofjp <saitofjp@gmail.com> (https://github.com/saitofjp)",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/saitofjp/redux-action-chain/issues"
+  },
+  "homepage": "https://github.com/saitofjp/redux-action-chain#readme",
   "devDependencies": {
     "@types/node": "^9.6.2",
     "@types/redux-actions": "^2.2.4",
