@@ -10,6 +10,10 @@
     "test": "ts-node node_modules/tape/bin/tape tests/*.ts",
     "prepublish": "npm run clean && npm run test && npm run build"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/saitofjp/redux-action-chain"
+  },
   "keywords": [
     "redux",
     "flux",
@@ -17,7 +21,7 @@
     "chain",
     "side effect"
   ],
-  "author": "saitofjp",
+  "author": "saitofjp <saitofjp@gmail.com> (https://github.com/saitofjp)",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^9.6.2",
