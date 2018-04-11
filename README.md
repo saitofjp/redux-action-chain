@@ -1,5 +1,7 @@
-# redux-action-chain
+[![npm version](https://badge.fury.io/js/redux-action-chain.svg)](https://badge.fury.io/js/redux-action-chain)
+[![Build Status](https://travis-ci.org/saitofjp/redux-action-chain.svg?branch=master)](https://travis-ci.org/saitofjp/redux-action-chain)
 
+# redux-action-chain
 `redux-action-chain` is a middleware that aims to easily manage side effects of application.
 
 - action is kept as a pure object. compared to [redux-thunk](https://github.com/gaearon/redux-thunk) / [redux-promise](https://github.com/redux-utilities/redux-promise)
@@ -93,13 +95,16 @@ new ActionChain()
 ```
 
 * call `toString()` of actionCreator ([redux-actions](https://github.com/redux-utilities/redux-actions)).
+* passing payload
 
 
 ```js
 //same
 new ActionChain()
-    .chain(userRequestAction, (payload, action) => userFetchAction(payload))
+    .chain(userRequestAction.toString(), (payload, action) => userFetchAction(payload))
 ```
+
+
 
 ### TypeScript FSA
 
@@ -252,13 +257,13 @@ new ActionChain()
 
 ## For Test
 
-```js
+```ts
 
 chainPingPong = new ActionChain();
   .chain(...)
 
 chainPingPong.get(action) => Array<HandlerObject>
-chainPingPong.handle(action, {dispatch, getState})　=> Array<next action>
+chainPingPong.handle(action, {dispatch, getState})　=> Array<Action> //next action
 chainPingPong.dispatch(action, {dispatch, getState}) =>  dispatch called
 
 //async
