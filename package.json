@@ -38,6 +38,7 @@
     "tape": "^4.9.0",
     "ts-node": "^5.0.1",
     "typescript": "^2.8.1",
-    "typescript-fsa": "^2.5.0"
+    "typescript-fsa": "^2.5.0",
+    "typings-tester": "^0.3.1"
   }
 }

@@ -1,7 +1,5 @@
-[![npm version](https://badge.fury.io/js/redux-action-chain.svg)](https://badge.fury.io/js/redux-action-chain)
-[![Build Status](https://travis-ci.org/saitofjp/redux-action-chain.svg?branch=master)](https://travis-ci.org/saitofjp/redux-action-chain)
 
-# redux-action-chain
+# redux-action-chain  [![npm version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]
 `redux-action-chain` is a middleware that aims to easily manage side effects of application.
 
 - action is kept as a pure object. compared to [redux-thunk](https://github.com/gaearon/redux-thunk) / [redux-promise](https://github.com/redux-utilities/redux-promise)
@@ -270,3 +268,9 @@ chainPingPong.dispatch(action, {dispatch, getState}) =>  dispatch called
 await chainPingPong.dispatch(action, {dispatch, getState};
 
 ```
+
+
+[npm-image]: https://badge.fury.io/js/redux-action-chain.svg
+[npm-url]: https://badge.fury.io/js/redux-action-chain
+[travis-image]: https://travis-ci.org/saitofjp/redux-action-chain.svg?branch=master
+[travis-url]: https://travis-ci.org/saitofjp/redux-action-chain
