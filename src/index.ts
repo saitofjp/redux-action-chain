@@ -1,6 +1,4 @@
 import { Middleware, MiddlewareAPI, Dispatch, Action, ActionCreator } from "redux";
-import { ParsedUrlQuery } from "querystring";
-import { access } from "fs";
 import { isFunction } from "util";
 
 declare module "redux" {
