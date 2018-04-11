@@ -1,6 +1,8 @@
 import * as tape from "tape"
 import { ActionChain, createActionChainMiddleware, combineActionChains, attach } from "../src";
+import { check, checkDirectory } from "typings-tester";
 import { MiddlewareAPI } from "redux";
+import { join } from "path";
 
 
 const dummyApi = (): MiddlewareAPI<{}> & any => {
@@ -31,13 +33,13 @@ const third = () => ({ type: "third" });
 
 tape("chain get", function (t: tape.Test) {
 
-    const actionCreatorHandler =  (payload) => handler(payload);
+    const actionCreatorHandler = (payload) => handler(payload);
     const actual = new ActionChain()
         .chain(actionCreator().type, actionCreatorHandler)
         .get(actionCreator())[0];
     t.equal(actual.actionCreatorHandler, actionCreatorHandler);
 
-    const attachHandler =  (action , {} ) => {};
+    const attachHandler = (action, { }) => { };
     const actual2 = new ActionChain()
         .chain(actionCreator().type, attach(attachHandler))
         .get(actionCreator())[0];
@@ -48,7 +50,7 @@ tape("chain get", function (t: tape.Test) {
 
 tape("chain handle", function (t: tape.Test) {
     const api = dummyApi();
-    const handle =  (payload) => handler(payload);
+    const handle = (payload) => handler(payload);
 
     const actual = new ActionChain()
         .chain(actionCreator().type, handle)
@@ -75,7 +77,7 @@ tape("chain 2nd arg", function (t: tape.Test) {
     const api = dummyApi();
 
     new ActionChain()
-        .chain(actionCreator().type, (payload, action:{payload:any}) => handler(action.payload))
+        .chain(actionCreator().type, (payload, action: { payload: any }) => handler(action.payload))
         .dispatch(actionCreator(), api)
 
     t.equal(api.last().type, handler(payload).type);
@@ -99,7 +101,7 @@ tape("chain attach", function (t: tape.Test) {
     let api = dummyApi();
     new ActionChain()
         .chain(actionCreator().type,
-            attach( ({payload}, { dispatch, getState}) => {
+            attach(({ payload }, { dispatch, getState }) => {
                 dispatch(handler(payload))
             }))
         .dispatch(actionCreator(), api);
@@ -183,5 +185,12 @@ tape("action chain combine", async function (t: tape.Test) {
 
     const hoge = async () => await 1
     console.log(await hoge());
+    t.end();
+});
+
+tape('typings', (t: tape.Test) => {
+    t.doesNotThrow(() => {
+        checkDirectory("typings");
+    });
     t.end();
 });

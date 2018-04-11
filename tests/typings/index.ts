@@ -61,7 +61,7 @@ namespace Handler {
     chain.chain(ActionCreator.simple, ()=> ({type:"PONG"}) )
     chain.chain(ActionCreator.payloadNumber, ActionCreator.simple)
 
-    // expect-error
+    // typings:expect-error
     chain.chain(ActionCreator.payloadNumber, ActionCreator.paramsString)
 
     chain.chain(ActionCreator.payloadNumber, ActionCreator.simple)
@@ -69,7 +69,7 @@ namespace Handler {
 
     chain.chain(ActionCreator.tsfNumber, ActionCreator.tsfUndefined)
 
-    // expect-error
+    // typings:expect-error
     chain.chain(ActionCreator.tsfNumber, ActionCreator.tsfString)
     chain.chain(TYPE_A_TEST_SIMPLE, ActionCreator.simple)
     chain.chain(TYPE_A_TEST_SIMPLE, ActionCreator.paramNumber)
@@ -91,7 +91,7 @@ namespace Handler {
     chain.chain(ActionCreator.tsfNumber, attach(Handler.asyncNumber))
     chain.chain(ActionCreator.tsfString, attach(Handler.asyncString))
 
-    // expect-error
+    // typings:expect-error
     chain.chain(ActionCreator.tsfNumber, attach(Handler.simpleString))
 
     chain.chain(ActionCreator.tsfUndefined, Handler.thunkUndefined)
@@ -100,13 +100,13 @@ namespace Handler {
     chain.chain(ActionCreator.tsfNumber, Handler.thunkNumber)
     chain.chain(ActionCreator.tsfString, Handler.thunkUndefined)
 
-    // expect-error
+    // typings:expect-error
     chain.chain(ActionCreator.tsfString, Handler.thunkNumber)
 
     chain.chain(ActionCreator.tsfNumber, Handler.asyncThunkNumber)
     chain.chain(ActionCreator.tsfString, Handler.asyncThunkUndefined)
 
-    // expect-error
+    // typings:expect-error
     chain.chain(ActionCreator.tsfString, Handler.asyncThunkNumber)
 
     chain.chain(ActionCreator.payloadNumber, ActionCreator.paramNumber)
