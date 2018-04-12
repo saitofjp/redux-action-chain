@@ -1,6 +1,6 @@
 {
   "name": "redux-action-chain",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "`redux-action-chain` is a middleware that aims to easily manage side effects of application.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
