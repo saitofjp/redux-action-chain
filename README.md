@@ -62,7 +62,7 @@ new ActionChain()
     .chain("PING", () => ({ type: "PONG" }))
     .chain("USER_REQUEST", (payload) => fetchUser(payload.userId)
                                        .then(user => ({ type: "USER_FETCHED", payload: user })))
-    .chain("USER_FETCHED", postsRequest)
+    .chain("USER_FETCHED", () => ({ type: "POSTS_REQUEST" }))
     .chain("POSTS_REQUEST", attach(async (action, { dispatch, getState }) => {
         const { post } = getState();
         if (post.isFetched) return;
