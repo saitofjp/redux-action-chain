@@ -243,7 +243,7 @@ import _ from 'lodash'
 
 const throttledUpdateSearchWord = _.throttle(100, (action, { dispatch }) =>{ dispatch(updateSearchWord()); });
 new ActionChain()
-    .chain(changeInput, throttledUpdateSearchWord)
+    .chain(changeInput, attach(throttledUpdateSearchWord))
     .chain(updateSearchWord, searchQuery);
 
 
